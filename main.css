@@ -1,0 +1,114 @@
+/*  */
+html {
+  background: linear-gradient(
+    to top left,
+    #FF8522,
+    LightSkyBlue 25%,
+    DeepSkyBlue
+
+    );
+    background-repeat: no-repeat;
+    min-height: 100%;
+}
+#game-wrapper {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  padding-top: 1rem;
+}
+#game-wrapper table {
+  border: 0.25rem solid DarkGreen;
+  border-collapse: collapse;
+  border-radius: 4px;
+  width:10rem;
+}
+
+#game-wrapper td {
+  height: 3.2rem;
+  width: 3.2rem;
+  border: 1px dotted ForestGreen;
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive;
+  color: #003005;
+  cursor:crosshair;
+
+}
+#game-wrapper td.mark_X, #game-wrapper td.mark_O  {
+  cursor: not-allowed;
+}
+.player-turn {
+  font-size: 1.4rem;
+  font-family: 'Comic Sans MS', cursive;
+  color: #002005;
+  margin-top: 0.3rem;
+}
+.turn-char {
+  font-family: 'Comic Sans MS', cursive;
+  color: #003005;
+  font-size: 1.8rem;
+}
+#again-button, #reset-button, #undo-button {
+  margin-top: 0.8rem;
+  height: 1.6rem;
+  font-size: 1rem;
+  color: #002005;
+  background-color: rgba(240,255,250,0.7);
+  border-radius: 3px;
+  font-family: 'Comic Sans MS', cursive;
+
+
+}
+.button-wrapper {
+  margin-top: 0.8rem;
+}
+
+#again-button {
+  width: 10rem;
+
+}
+#reset-button, #undo-button {
+  width: 4.5rem;
+  margin: 0;
+
+}
+#reset-button {
+  margin-right: 0.5rem;
+}
+#undo-button {
+  margin-left: 0.5rem;
+}
+button:disabled {
+  opacity: 0.5;
+  color: Grey;
+}
+
+
+header {
+  display:grid;
+  justify-items: center;
+}
+header h1 {
+  color: #040;
+  font-size: 1.5rem;
+  margin: 0.4rem 0;
+}
+header p {
+  margin: -0.2rem;
+  color: #030;
+  font-family: 'Comic Sans MS', cursive;
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+}
+
+footer {
+  font-size: 0.75rem;
+  display: grid;
+  justify-content: center;
+  opacity: 0.9;
+
+}
+footer a{
+  color: #040;
+}
