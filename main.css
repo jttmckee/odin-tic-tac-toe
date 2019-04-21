@@ -50,13 +50,12 @@ html {
 }
 #again-button, #reset-button, #undo-button {
   margin-top: 0.8rem;
-  height: 1.6rem;
   font-size: 1rem;
   color: #002005;
   background-color: rgba(240,255,250,0.7);
   border-radius: 3px;
   font-family: 'Comic Sans MS', cursive;
-
+  padding: 0.1rem;
 
 }
 .button-wrapper {
