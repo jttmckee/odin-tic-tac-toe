@@ -104,11 +104,87 @@ const ai = (() => {
     return ai_active;
   }
   const play = () => {
-    do {
-      col = Math.floor(Math.random() * 3);
-      row = Math.floor(Math.random() * 3);
-    } while( moves.numMoves() < 9 && !(markCell(col,row)));
+    // do {
+    //   col = Math.floor(Math.random() * 3);
+    //   row = Math.floor(Math.random() * 3);
+    // } while( moves.numMoves() < 9 && !(markCell(col,row)));
+    if (moves.numMoves() < 9) {
+      move = minimax(gameBoard.getBoard(),ai);
+      markCell(move.col,move.row);
+    }
   }
+
+  //Minimax algorithm
+  const human = 'X';
+  const ai = 'O';
+  function emptyCells(board) {
+    const flatCells = board.flat().reduce((accumulator, cell,index) => {
+      if (cell === ' ') { accumulator.push(index) }
+      return accumulator;
+    },[])
+    return flatCells.map((flatIndex) => {
+      return {col: Math.floor(flatIndex / 3),row: (flatIndex % 3)}
+    })
+  }
+  const col_match = (board,player, col) => {
+    accumulator = true;
+    for(let i = 0; i <= 2; i++) {
+      accumulator &= (board[col][i] === player);
+    }
+    return accumulator;
+    // board[col].reduce((accumulator,cell) => {
+    //   return accumulator && (cell === player);
+    // }, true)
+  }
+  const row_match = (board,player, row) => {
+    accumulator = true;
+    for(let i = 0; i <= 2; i++) {
+      accumulator &= (board[i][row] ===player);
+    }
+    return accumulator;
+  }
+  const winning = (board, player) => {
+    return (
+    col_match(board,player,0) ||
+    col_match(board,player,1) ||
+    col_match(board,player,2) ||
+    row_match(board,player,0) ||
+    row_match(board,player,1) ||
+    row_match(board,player,2) ||
+    (board[0][0]=== player && board[1][1] ===player && board[2][2] === player) ||
+    (board[2][0]=== player && board[1][1] ===player && board[0][2] === player)
+    )
+  }
+  const minimax = (board, player) => {
+    let freeCells = emptyCells(board);
+
+    if (winning(board, ai)) {
+      return {score: 1};
+    } else if (winning(board, human)) {
+      return {score: -1};
+    } else if (freeCells.length === 0 ){
+      return {score: 0};
+    } else {
+      let moves = freeCells.map((cell) => {
+        let newBoard = JSON.parse(JSON.stringify(board));
+        newBoard[cell.col][cell.row] = player;
+        newPlayer = (player === human ? ai : human  );
+        return {score: minimax(newBoard,newPlayer).score,
+          col: cell.col, row: cell.row};
+      });
+      if (player === ai) {
+        const max = Math.max(...(moves.map((move) => move.score)));
+        const best_moves = moves.filter((move) => move.score === max );
+        return best_moves[Math.floor(Math.random() * best_moves.length)];
+      } else {
+        const min = Math.min(...(moves.map((move) => move.score)));
+        const worst_moves = moves.filter((move) => move.score === min );
+        return worst_moves[Math.floor(Math.random() * worst_moves.length)];
+      }
+    }
+  }
+
+
 
   return {
     set,
